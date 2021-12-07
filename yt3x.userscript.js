@@ -32,7 +32,7 @@ const waitElementsLoaded = async (...elementsQueries) => {
 
 const getFormattedTime = (seconds, precise) => {
     seconds = Math.max(seconds, 0);
-        
+
     const hours = Math.floor(seconds / 60 / 60);
     const minutes = Math.floor(seconds / 60) % 60;
     let minutesDisplay = String(minutes);
@@ -42,7 +42,7 @@ const getFormattedTime = (seconds, precise) => {
     }
 
     let secondsDisplay = String(precise ? secondsNum.toFixed(3) : secondsNum);
-    
+
     if (secondsNum < 10) {
         //add a zero
         secondsDisplay = "0" + secondsDisplay;
