@@ -30,6 +30,7 @@ const waitElementsLoaded = async (...elementsQueries) => {
     )
 }
 
+// https://github.com/ajayyy/SponsorBlock/blob/0647576d6f60b5a9ea7dc90493b361e78d930026/src/utils.ts#L474
 const getFormattedTime = (seconds, precise) => {
     seconds = Math.max(seconds, 0);
 
@@ -63,6 +64,7 @@ const getFormattedTime = (seconds, precise) => {
 const speedUp = (videoElement) => {
     videoElement.playbackRate = 3
 
+    // https://github.com/ajayyy/SponsorBlock/blob/75b5c31d07378f65dc9dadbbba13b253de45182e/src/content.ts#L1926
     // YouTube player time display
     const display = document.querySelector(".ytp-time-display.notranslate")
     if (!display) return
@@ -81,7 +83,7 @@ const speedUp = (videoElement) => {
 
     const durationAfterSpeedUp = getFormattedTime(videoElement.duration / 3)
 
-    duration.innerText = (durationAfterSpeedUp == null || skippedDuration <= 0) ? "" : " (" + durationAfterSpeedUp + ")";
+    duration.innerText = " (" + durationAfterSpeedUp + ")";
 
 }
 
