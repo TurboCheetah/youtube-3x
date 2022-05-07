@@ -61,8 +61,8 @@ const getFormattedTime = (seconds, precise) => {
     return formatted;
 }
 
-const speedUp = (videoElement) => {
-    videoElement.playbackRate = 3
+const changeSpeed = (videoElement, speed) => {
+    videoElement.playbackRate = speed
 
     // https://github.com/ajayyy/SponsorBlock/blob/75b5c31d07378f65dc9dadbbba13b253de45182e/src/content.ts#L1926
     // YouTube player time display
@@ -81,7 +81,7 @@ const speedUp = (videoElement) => {
         display.appendChild(duration)
     }
 
-    const durationAfterSpeedUp = getFormattedTime(videoElement.duration / 3)
+    const durationAfterSpeedUp = getFormattedTime(videoElement.duration / speed)
 
     duration.innerText = " (" + durationAfterSpeedUp + ")";
 
@@ -90,10 +90,21 @@ const speedUp = (videoElement) => {
 ;(async () => {
 
     await waitElementsLoaded('video').then(() => {
-        speedUp(document.querySelector('video'))
+        changeSpeed(document.querySelector('video'), 3)
     })
 
     window.addEventListener('yt-page-data-updated', () => {
-        speedUp(document.querySelector('video'))
+        changeSpeed(document.querySelector('video'), 3)
     })
 })()
+
+// add hotkeys for adjusting playback speed
+document.addEventListener('keydown', (event) => {
+    if (event.key === '[') {
+        // adjust speed by a factor of 1
+        changeSpeed(document.querySelector('video'), document.querySelector('video').playbackRate - 1)
+    } else if (event.key === ']') {
+        // adjust speed by a factor of 1
+        changeSpeed(document.querySelector('video'), document.querySelector('video').playbackRate + 1)
+    }
+})
